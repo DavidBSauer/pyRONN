@@ -42,7 +42,7 @@ def load_libRONN(weight=disorder_weight):
 
     # Initialize predict_seq method
     libRONN.predict_seq.argtypes = [ctypes.c_char_p,
-                                    ndpointer(dtype=np.float),
+                                    ndpointer(dtype=np.double),
                                     ctypes.c_bool]
 
     return
@@ -86,7 +86,7 @@ def calc_ronn(seq):
     # # handle invalid characters
     # missing_pos = [match.span()[1]-1 for match in re_remove.finditer(seq)]
     # seq = re_remove.sub('', seq)
-    scores = np.zeros(len(seq), dtype=np.float)
+    scores = np.zeros(len(seq), dtype=np.double)
     libRONN.predict_seq(seq.encode(), scores, False)
     return scores
 
